@@ -2,7 +2,7 @@ nyuukin = int(input("いくら入れましたか？"))
 ryoukin = int(input("いくらのものを買いますか"))
 
 nyuukin = nyuukin - ryoukin
-maisuu = [1 , 10 , 10 , 2]
+maisuu = [1 , 10 , 10 , 10]
 if maisuu[0] > 0:
     otsuri_500 = nyuukin // 500
     nyuukin = nyuukin % 500
