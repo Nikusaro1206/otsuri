@@ -3,73 +3,109 @@ import tkinter.messagebox as tkmg
 
 class Aplication(tk.Frame):
     def __init__(self,root=None):
-        super().__init__(root,width=380,height=480,
+        super().__init__(root,width=300,height=400,
                          borderwidth=4,relief='groove')
         self.root = root
         self.pack()
+        self.nyuukin = 0
         self.pack_propagate(0)
         self.create_widgets()
 
     def create_widgets(self):
-        lbl_1000 = tk.Label(self,text="1000")
-        lbl_500 = tk.Label(self,text="500")
-        lbl_100 = tk.Label(self,text="100")
-        lbl_50 = tk.Label(self,text="50")
-        lbl_10 = tk.Label(self,text="10")
-        self.text_1000 = tk.Entry(self,width=2)
-        self.text_500 = tk.Entry(self,width=2)
-        self.text_100 = tk.Entry(self,width=2)
-        self.text_50 = tk.Entry(self,width=2)
-        self.text_10 = tk.Entry(self,width=2)
+        #投入口
+        self.input_coin = tk.LabelFrame(self,text="投入口",padx=10,pady=10)
+        coin_btn_1000 =tk.Button(self.input_coin,text = 1000,command = lambda:self.total_coin(4))
+        coin_btn_500 =tk.Button(self.input_coin,text = 500,command = lambda:self.total_coin(0))
+        coin_btn_100 =tk.Button(self.input_coin,text = 100,command = lambda:self.total_coin(1))
+        coin_btn_50 =tk.Button(self.input_coin,text = 50,command = lambda:self.total_coin(2))
+        coin_btn_10 =tk.Button(self.input_coin,text = 10,command = lambda:self.total_coin(3))
+        coin_btn_reset =tk.Button(self.input_coin,text = "リセット",command = self.coin_reset)
+        self.total_Text = tk.StringVar()
+        self.total_Text.set(0)
+        total_label = tk.Label(self.input_coin,textvariable=self.total_Text)
 
-        btn_100 = tk.Button(self,text ="100",command = lambda:self.sentaku_click(100))
-        btn_110 = tk.Button(self,text ="110",command = lambda:self.sentaku_click(110))
-        btn_120 = tk.Button(self,text ="120",command = lambda:self.sentaku_click(120))
-        btn_130 = tk.Button(self,text ="130",command = lambda:self.sentaku_click(130))
-        btn_140 = tk.Button(self,text ="140",command = lambda:self.sentaku_click(140))
+        #商品ボタン
+        btn_sp = tk.LabelFrame(self,text="商品ボタン",padx=10,pady=10)
+        btn_100 = tk.Button(btn_sp,text ="100",command = lambda:self.sentaku_click(100))
+        btn_110 = tk.Button(btn_sp,text ="110",command = lambda:self.sentaku_click(110))
+        btn_120 = tk.Button(btn_sp,text ="120",command = lambda:self.sentaku_click(120))
+        btn_130 = tk.Button(btn_sp,text ="130",command = lambda:self.sentaku_click(130))
+        btn_140 = tk.Button(btn_sp,text ="140",command = lambda:self.sentaku_click(140))
 
-        lbl_1000.pack()
-        self.text_1000.pack()
-        lbl_500.pack()
-        self.text_500.pack()
-        lbl_100.pack()
-        self.text_100.pack()
-        lbl_50.pack()
-        self.text_50.pack()
-        lbl_10.pack()
-        self.text_10.pack()
+        #釣り銭表示
+        turi_sp = tk.LabelFrame(self,text ="釣り銭口",padx=10,pady=10)
+        turi_500_sp = tk.Label(turi_sp,text="500円玉:",width=7)
+        self.turi_500_Text = tk.StringVar()
+        self.turi_500_Text.set(0)
+        turi_500_label = tk.Label(turi_sp,textvariable=self.turi_500_Text)
+        turi_100_sp = tk.Label(turi_sp,text="100円玉:",width=7)
+        self.turi_100_Text = tk.StringVar()
+        self.turi_100_Text.set(0)
+        turi_100_label = tk.Label(turi_sp,textvariable=self.turi_100_Text)
+        turi_50_sp = tk.Label(turi_sp,text="50円玉:",width=7)
+        self.turi_50_Text = tk.StringVar()
+        self.turi_50_Text.set(0)
+        turi_50_label = tk.Label(turi_sp,textvariable=self.turi_50_Text)
+        turi_10_sp = tk.Label(turi_sp,text="10円玉:",width=7)
+        self.turi_10_Text = tk.StringVar()
+        self.turi_10_Text.set(0)
+        turi_10_label = tk.Label(turi_sp,textvariable=self.turi_10_Text)
 
-        btn_100.pack()
-        btn_110.pack()
-        btn_120.pack()
-        btn_130.pack()
-        btn_140.pack()
+        line1 = 45
+        line2 = 45
+        line3 = 150
+        line4 = 200
+        line5 = 250
+        self.input_coin.place(relx=0.5,y=line1,anchor=tk.CENTER)
+        coin_btn_1000.grid(in_ =self.input_coin,row=0,column=0)
+        coin_btn_500.grid(in_ =self.input_coin,row=0,column=1)
+        coin_btn_100.grid(in_ =self.input_coin,row=0,column=2)
+        coin_btn_50.grid(in_ =self.input_coin,row=0,column=3)
+        coin_btn_10.grid(in_ =self.input_coin,row=0,column=4)
+        coin_btn_reset.grid(in_ =self.input_coin,row=1,column=0)
+        total_label.grid(in_ =self.input_coin,row=1,column=3 )
 
+        btn_sp.place(relx = 0.5,y=line3,anchor=tk.CENTER)
+        btn_100.grid(in_ =btn_sp,row=0,column=0)
+        btn_110.grid(in_ =btn_sp,row=0,column=1)
+        btn_120.grid(in_ =btn_sp,row=0,column=2)
+        btn_130.grid(in_ =btn_sp,row=0,column=3)
+        btn_140.grid(in_ =btn_sp,row=0,column=4)
+
+        turi_sp.place(relx=0.1,y=line5)
+        turi_500_sp.grid(in_ = turi_sp,row=0,column = 0)
+        turi_500_label.grid(in_ = turi_sp,row=0,column = 1)
+        turi_100_sp.grid(in_ = turi_sp,row=1,column = 0)
+        turi_100_label.grid(in_ = turi_sp,row=1,column = 1)
+        turi_50_sp.grid(in_ = turi_sp,row=2,column = 0)
+        turi_50_label.grid(in_ = turi_sp,row=2,column = 1)
+        turi_10_sp.grid(in_ = turi_sp,row=3,column = 0)
+        turi_10_label.grid(in_ = turi_sp,row=3,column = 1)
 
     def sentaku_click(self,i):
-        in_1000 = int(self.text_1000.get())
-        in_coin[0] = int(self.text_500.get())
-        in_coin[1] = int(self.text_100.get())
-        in_coin[2] = int(self.text_50.get())
-        in_coin[3] = int(self.text_10.get())
-        #print(in_coin[0])
-        #print(in_coin[1])
-        #print(in_coin[2])
-        #print(in_coin[3])
-        nyuukin = int(1000*in_1000+500*in_coin[0] + 100*in_coin[1] + 50*in_coin[2] +10*in_coin[3])
-        #print(nyuukin)
 
         ryoukin = int(i)
-        nyuukin = nyuukin - ryoukin
-        #print(nyuukin)
+        nyuukin = self.nyuukin - ryoukin
 
         for i in range (0,4):
             nyuukin = self.maisuu_keisan(i,nyuukin)
-            #print(nyuukin)
+            if otr[i] < 0:
+                break
+            else:
+                pass
+
         self.output_window(nyuukin)
+    
+    def total_coin(self,kingaku):
+        in_coin[kingaku] = in_coin[kingaku] + 1
+        self.nyuukin = self.nyuukin + coin[kingaku]
+        print(self.nyuukin)
+        self.total_Text.set(self.nyuukin)
+        print(in_coin)
 
     def maisuu_keisan(self,i,nyuukin):
         otr_kari = nyuukin // coin[i]
+        print(otr_kari)
         if maisuu[i] >= otr_kari:
             otr[i] = otr_kari
             return nyuukin % coin[i]
@@ -78,7 +114,9 @@ class Aplication(tk.Frame):
             return nyuukin - (coin[i] * otr[i])
         
     def output_window(self,nyuukin):
+
         if nyuukin == 0:
+            
             print(f"500円玉:{otr[0]}")
             print(f"100円玉:{otr[1]}")
             print(f"50円玉:{otr[2]}")
@@ -86,18 +124,37 @@ class Aplication(tk.Frame):
             for i in range (0,4):
                 maisuu[i] = maisuu[i] - otr[i]
                 maisuu[i] = maisuu[i] + in_coin[i]
-            print(maisuu)
+            self.turi_rescan()
         else:
+            tkmg.showinfo("精算できません","釣り銭切れもしくは金額不足")
             print("精算できません")
-            print(maisuu)
+            #print(maisuu)
         self.stats_reset()
 
     def stats_reset(self):
-        otr = [0 , 0 , 0, 0]
+        for i in range (0,4):
+            otr[i] = 0
+        #print(otr)
+        self.nyuukin = 0
+        for i in range (0,5):
+            in_coin[i] = 0
+        self.total_Text.set(self.nyuukin)
+
+    def coin_reset(self):
+        self.nyuukin = 0
+        for i in range (0,5):
+            in_coin[i] = 0
+        self.total_Text.set(self.nyuukin)
+
+    def turi_rescan(self):
+        self.turi_500_Text.set(otr[0])
+        self.turi_100_Text.set(otr[1])
+        self.turi_50_Text.set(otr[2])
+        self.turi_10_Text.set(otr[3])
 
 maisuu = [1 , 10 , 10 , 10]
-coin = [500 , 100 , 50 ,10]
-in_coin = [0 , 0 , 0 , 0]
+coin = [500 , 100 , 50 ,10 , 1000]
+in_coin = [0 , 0 , 0 , 0 , 0]
 otr = [0 , 0 , 0, 0]
 
 root = tk.Tk()
