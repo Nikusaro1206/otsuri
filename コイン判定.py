@@ -134,8 +134,8 @@ class Aplication(tk.Frame):
 
     #処理部分
     #投入された合計金額
-    def total_coin(self,kingaku):
-        in_coin[kingaku] += in_coin[kingaku]
+    def total_coin(self,kingaku): 
+        in_coin[kingaku] = in_coin[kingaku] + 1#in_coin[kingaku] += in_coin[kingaku] だと10円玉入れた時に反映されない
         self.nyuukin = self.nyuukin + coin[kingaku]#押されるたびに処理なので種類を足すだけで済む
         self.total_Text.set(self.nyuukin)
 
