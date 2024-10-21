@@ -13,16 +13,16 @@ class Aplication(tk.Frame):
 
     def create_widgets(self):#GUI部分
         #投入口
-        self.input_coin = tk.LabelFrame(self,text="投入口",padx=10,pady=10)
-        coin_btn_1000 =tk.Button(self.input_coin,text = 1000,command = lambda:self.total_coin(4),padx=5)#1000はあとから付け足したため4
-        coin_btn_500 =tk.Button(self.input_coin,text = 500,command = lambda:self.total_coin(0),padx=5)
-        coin_btn_100 =tk.Button(self.input_coin,text = 100,command = lambda:self.total_coin(1),padx=5)
-        coin_btn_50 =tk.Button(self.input_coin,text = 50,command = lambda:self.total_coin(2),padx=5)
-        coin_btn_10 =tk.Button(self.input_coin,text = 10,command = lambda:self.total_coin(3),padx=5)
-        coin_btn_reset =tk.Button(self.input_coin,text = "リセット",command = self.coin_reset,)
+        input_coin = tk.LabelFrame(self,text="投入口",padx=10,pady=10)
+        coin_btn_1000 =tk.Button(input_coin,text = 1000,command = lambda:self.total_coin(4),padx=5)#1000はあとから付け足したため4
+        coin_btn_500 =tk.Button(input_coin,text = 500,command = lambda:self.total_coin(0),padx=5)
+        coin_btn_100 =tk.Button(input_coin,text = 100,command = lambda:self.total_coin(1),padx=5)
+        coin_btn_50 =tk.Button(input_coin,text = 50,command = lambda:self.total_coin(2),padx=5)
+        coin_btn_10 =tk.Button(input_coin,text = 10,command = lambda:self.total_coin(3),padx=5)
+        coin_btn_reset =tk.Button(input_coin,text = "リセット",command = self.coin_reset,)
         self.total_Text = tk.StringVar()
         self.total_Text.set(0)
-        total_label = tk.Label(self.input_coin,textvariable=self.total_Text)
+        total_label = tk.Label(input_coin,textvariable=self.total_Text)
 
         #商品ボタン
         btn_sp = tk.LabelFrame(self,text="商品ボタン",padx=10,pady=10)
@@ -85,14 +85,14 @@ class Aplication(tk.Frame):
         line5 = 250
 
         #投入口
-        self.input_coin.place(relx=0.5,y=line1,anchor=tk.CENTER)
-        coin_btn_1000.grid(in_ =self.input_coin,row=0,column=0)
-        coin_btn_500.grid(in_ =self.input_coin,row=0,column=1)
-        coin_btn_100.grid(in_ =self.input_coin,row=0,column=2)
-        coin_btn_50.grid(in_ =self.input_coin,row=0,column=3)
-        coin_btn_10.grid(in_ =self.input_coin,row=0,column=4)
-        coin_btn_reset.grid(in_ =self.input_coin,row=1,column=0)
-        total_label.grid(in_ =self.input_coin,row=1,column=3 )
+        input_coin.place(relx=0.5,y=line1,anchor=tk.CENTER)
+        coin_btn_1000.grid(in_ =input_coin,row=0,column=0)
+        coin_btn_500.grid(in_ =input_coin,row=0,column=1)
+        coin_btn_100.grid(in_ =input_coin,row=0,column=2)
+        coin_btn_50.grid(in_ =input_coin,row=0,column=3)
+        coin_btn_10.grid(in_ =input_coin,row=0,column=4)
+        coin_btn_reset.grid(in_ =input_coin,row=1,column=0)
+        total_label.grid(in_ =input_coin,row=1,column=3 )
 
         #商品ボタン
         btn_sp.place(relx = 0.5,y=line3,anchor=tk.CENTER)
@@ -162,7 +162,7 @@ class Aplication(tk.Frame):
         else:
             otr[i] = maisuu[i]#あるだけいれる
             return nyuukin - (coin[i] * otr[i])
-            
+
     #精算できたか判定。できてなければinfoで知らせる
     def output_window(self,nyuukin):
         if nyuukin == 0:
