@@ -43,19 +43,19 @@ class Aplication(tk.Frame):
         turi_in500_sp = tk.Label(turi_in_sp,text="500円玉:",width=7)
         self.turi_in500_Text = tk.StringVar()
         self.turi_in500_Text.set(maisuu[0])
-        self.turi_in500_label = tk.Entry(turi_in_sp,textvariable=self.turi_in500_Text,width=4)
+        self.turi_in500_entry = tk.Entry(turi_in_sp,textvariable=self.turi_in500_Text,width=4)
         turi_in100_sp = tk.Label(turi_in_sp,text="100円玉:",width=7)
         self.turi_in100_Text = tk.StringVar()
         self.turi_in100_Text.set(maisuu[1])
-        self.turi_in100_label = tk.Entry(turi_in_sp,textvariable=self.turi_in100_Text,width=4)
+        self.turi_in100_entry = tk.Entry(turi_in_sp,textvariable=self.turi_in100_Text,width=4)
         turi_in50_sp = tk.Label(turi_in_sp,text="50円玉:",width=7)
         self.turi_in50_Text = tk.StringVar()
         self.turi_in50_Text.set(maisuu[2])
-        self.turi_in50_label = tk.Entry(turi_in_sp,textvariable=self.turi_in50_Text,width=4)
+        self.turi_in50_entry = tk.Entry(turi_in_sp,textvariable=self.turi_in50_Text,width=4)
         turi_in10_sp = tk.Label(turi_in_sp,text="10円玉:",width=7)
         self.turi_in10_Text = tk.StringVar()
         self.turi_in10_Text.set(maisuu[3])
-        self.turi_in10_label = tk.Entry(turi_in_sp,textvariable=self.turi_in10_Text,width=4)
+        self.turi_in10_entry = tk.Entry(turi_in_sp,textvariable=self.turi_in10_Text,width=4)
         turi_rescan_btn = tk.Button(turi_in_sp,text="更新",width=3,command = self.turi_in_entry_scan)
 
         #釣り銭表示
@@ -111,13 +111,13 @@ class Aplication(tk.Frame):
         #釣り銭残量
         turi_in_sp.place(relx=0.1,y=line4)
         turi_in500_sp.grid(in_ = turi_in_sp,row=0,column = 0)
-        self.turi_in500_label.grid(in_ = turi_in_sp,row=0,column = 1)
+        self.turi_in500_entry.grid(in_ = turi_in_sp,row=0,column = 1)
         turi_in100_sp.grid(in_ = turi_in_sp,row=1,column = 0)
-        self.turi_in100_label.grid(in_ = turi_in_sp,row=1,column = 1)
+        self.turi_in100_entry.grid(in_ = turi_in_sp,row=1,column = 1)
         turi_in50_sp.grid(in_ = turi_in_sp,row=2,column = 0)
-        self.turi_in50_label.grid(in_ = turi_in_sp,row=2,column = 1)
+        self.turi_in50_entry.grid(in_ = turi_in_sp,row=2,column = 1)
         turi_in10_sp.grid(in_ = turi_in_sp,row=3,column = 0)
-        self.turi_in10_label.grid(in_ = turi_in_sp,row=3,column = 1)
+        self.turi_in10_entry.grid(in_ = turi_in_sp,row=3,column = 1)
         turi_rescan_btn.grid(in_ = turi_in_sp,row = 4,column=1)
 
         #釣り銭部分
@@ -135,8 +135,8 @@ class Aplication(tk.Frame):
     #処理部分
     #投入された合計金額
     def total_coin(self,kingaku): 
-        in_coin[kingaku] = in_coin[kingaku] + 1#in_coin[kingaku] += in_coin[kingaku] だと10円玉入れた時に反映されない
-        self.nyuukin = self.nyuukin + coin[kingaku]#押されるたびに処理なので種類を足すだけで済む
+        in_coin[kingaku] += 1
+        self.nyuukin += coin[kingaku]#押されるたびに処理なので種類を足すだけで済む
         self.total_Text.set(self.nyuukin)
 
     #商品ボタン押されたあとの枚数の計算から出力まで
@@ -167,8 +167,8 @@ class Aplication(tk.Frame):
     def output_window(self,nyuukin):
         if nyuukin == 0:
             for i in range (0,4):
-                maisuu[i] = maisuu[i] - otr[i]#使ったお金を引いて
-                maisuu[i] = maisuu[i] + in_coin[i]#入ったお金をいれる。精算前に追加すると精算できないとき処理増える
+                maisuu[i] -= otr[i]#使ったお金を引いて
+                maisuu[i] += in_coin[i]#入ったお金をいれる。精算前に追加すると精算できないとき処理増える
             self.turi_set()
         else:
             tkmg.showinfo("精算できません","釣り銭切れもしくは金額不足")
@@ -183,10 +183,10 @@ class Aplication(tk.Frame):
 
     #指定された値の取得と格納
     def turi_in_entry_scan(self):
-        maisuu[0] = int(self.turi_in500_label.get())
-        maisuu[1] = int(self.turi_in100_label.get())
-        maisuu[2] = int(self.turi_in50_label.get())
-        maisuu[3] = int(self.turi_in10_label.get())
+        maisuu[0] = int(self.turi_in500_entry.get())
+        maisuu[1] = int(self.turi_in100_entry.get())
+        maisuu[2] = int(self.turi_in50_entry.get())
+        maisuu[3] = int(self.turi_in10_entry.get())
         self.turi_in_set()
 
     #残りの釣り銭を更新
