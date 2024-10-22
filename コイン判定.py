@@ -76,13 +76,16 @@ class Aplication(tk.Frame):
         self.turi_10_Text = tk.StringVar()
         self.turi_10_Text.set(0)
         turi_10_label = tk.Label(turi_sp,textvariable=self.turi_10_Text)
+        self.totalChangesText = tk.StringVar()
+        self.totalChangesText.set(0)
+        totalChangeslabel = tk.Label(turi_sp,textvariable=self.totalChangesText)
 
         #ウィジェット配置
         line1 = 45
         line2 = 45
         line3 = 150
         line4 = 230
-        line5 = 250
+        line5 = 230
 
         #投入口
         input_coin.place(relx=0.5,y=line1,anchor=tk.CENTER)
@@ -130,6 +133,7 @@ class Aplication(tk.Frame):
         turi_50_label.grid(in_ = turi_sp,row=2,column = 1)
         turi_10_sp.grid(in_ = turi_sp,row=3,column = 0)
         turi_10_label.grid(in_ = turi_sp,row=3,column = 1)
+        totalChangeslabel.grid(in_ = turi_sp ,row = 5, column= 0)
         #GUI部分終了
 
     #処理部分
@@ -143,6 +147,7 @@ class Aplication(tk.Frame):
     def sentaku_click(self,i):
         ryoukin = int(i)
         nyuukin = self.nyuukin - ryoukin
+        self.totalChanges = nyuukin 
         for i in range (0,4):
             nyuukin = self.maisuu_keisan(i,nyuukin)
             if otr[i] < 0:#入金金額が足りない時にマイナスになる
@@ -180,6 +185,7 @@ class Aplication(tk.Frame):
         self.turi_100_Text.set(otr[1])
         self.turi_50_Text.set(otr[2])
         self.turi_10_Text.set(otr[3])
+        self.totalChangesText.set(self.totalChanges)
 
     #指定された値の取得と格納
     def turi_in_entry_scan(self):
