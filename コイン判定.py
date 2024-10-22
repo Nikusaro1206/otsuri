@@ -95,7 +95,7 @@ class Aplication(tk.Frame):
         coin_btn_50.grid(in_ =input_coin,row=0,column=3)
         coin_btn_10.grid(in_ =input_coin,row=0,column=4)
         coin_btn_reset.grid(in_ =input_coin,row=1,column=0)
-        total_label.grid(in_ =input_coin,row=1,column=3 )
+        total_label.grid(in_ =input_coin,row=1,column=3)
 
         #商品ボタン
         btn_sp.place(relx = 0.5,y=line3,anchor=tk.CENTER)
@@ -133,7 +133,7 @@ class Aplication(tk.Frame):
         turi_50_label.grid(in_ = turi_sp,row=2,column = 1)
         turi_10_sp.grid(in_ = turi_sp,row=3,column = 0)
         turi_10_label.grid(in_ = turi_sp,row=3,column = 1)
-        totalChangeslabel.grid(in_ = turi_sp ,row = 5, column= 0)
+        totalChangeslabel.grid(in_ = turi_sp ,row = 5, column= 0,columnspan=2,sticky = tk.E)
         #GUI部分終了
 
     #処理部分
